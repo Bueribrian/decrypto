@@ -5,14 +5,14 @@ import { CoreModule } from './modules/core/core.module';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'coins',
     pathMatch: 'full',
     loadChildren: () => import('./modules/core/core.module').then(m => m.CoreModule)
   },
   {
     // TODO: CAMBIAR A NOTFOUND
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'coins'
   }
 ];
 

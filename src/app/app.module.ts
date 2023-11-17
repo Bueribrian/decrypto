@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button'
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { CoinapiInterceptor } from './http-interceptors/coinapi.interceptor';
+import { ErrorInterceptor } from './http-interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,9 +19,7 @@ import { CoinapiInterceptor } from './http-interceptors/coinapi.interceptor';
     MatButtonModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS, useClass: CoinapiInterceptor, multi: true
-    },
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

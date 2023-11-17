@@ -20,7 +20,7 @@ export class CoinapiInterceptor implements HttpInterceptor {
         `${environment.services.coinapi.token}`
       )
     });
-
+    
     return next.handle(authReq);
   }
 }

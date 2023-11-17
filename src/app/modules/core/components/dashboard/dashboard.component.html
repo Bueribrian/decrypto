@@ -1,0 +1,46 @@
+<div class="container dashboard">
+    <div class="dashboard__header">
+        <!-- Coin selector -->
+        <mat-form-field>
+            <mat-label>Coin</mat-label>
+            <mat-select class="no-padding" (selectionChange)="getTrendigCurrencies()" [(value)]="selectedCurrency">
+                <mat-option *ngFor="let currency of currencies" [value]="currency">
+                    {{currency}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- View selector -->
+        <mat-button-toggle-group [(ngModel)]="displayType">
+            <mat-button-toggle value="cards" aria-label="Cards view">
+                <mat-icon>dashboard</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="table" aria-label="Table view">
+                <mat-icon>table_rows</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+
+    <div *ngIf="!error; else errorAlert" class="dashboard__content">
+        <ng-container *ngIf="!loading; else loadingSpinner">
+            <!-- <ng-container *ngIf="displayType === 'table'">
+                <app-assets-table [rates]="$rates"></app-assets-table>
+            </ng-container> -->
+            <ng-container *ngIf="displayType === 'cards'">
+                <div class="cards">
+                    <app-coin-card *ngFor="let coin of ($coins|async)" [coin]="coin"
+                        [currency]="selectedCurrency"></app-coin-card>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
+
+<!-- TODO: Mejorar este mensaje de error -->
+<ng-template #errorAlert>
+    Message error
+</ng-template>
+
+<ng-template #loadingSpinner>
+    <mat-spinner></mat-spinner>
+</ng-template>

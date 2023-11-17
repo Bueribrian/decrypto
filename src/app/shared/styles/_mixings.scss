@@ -1,19 +1,19 @@
 // Media queries
 @mixin responsive($breakpoint){
     @if $breakpoint == 'md' {
-        @media screen and (min-width: #{$md}px) {
+        @media screen and (min-width: #{$md}rem) {
             @content;
         }
     }
 
     @if $breakpoint == 'lg' {
-        @media screen and (min-width: #{$lg}px) {
+        @media screen and (min-width: #{$lg}rem) {
             @content;
         }
     }
 
     @if $breakpoint == 'xl' {
-        @media screen and (min-width: #{$xl}px) {
+        @media screen and (min-width: #{$xl}rem) {
             @content;
         }
     }

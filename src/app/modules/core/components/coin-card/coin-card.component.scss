@@ -1,0 +1,61 @@
+@import "_variables.scss";
+
+// mat-card{
+//     width: 22rem;
+//     cursor: pointer;
+//     transition: .3s box-shadow;
+
+//     &:hover, &:focus, &:active{
+//         transition: .3s box-shadow;
+//         box-shadow: 0px 0px 3px 1px rgba(28, 232, 247, 0.9);
+//     }
+// }
+
+.card{
+    padding: 2rem;
+    cursor: pointer;
+    transition: .3s box-shadow;
+
+    &:hover, &:focus, &:active{
+        transition: .3s box-shadow;
+        box-shadow: 0px 0px 3px 1px rgba($primary, 0.9);
+    }
+
+
+    &__header{
+        width: 100%;
+        display: flex;
+        padding-bottom: 1rem;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    &__body{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        &-symbol{
+            width: 100%;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 0.1rem;
+        }
+
+        &-id{
+            font-size: 1.2rem;
+        }
+
+        &-price{
+            font-size: 2rem;
+            text-align: right;
+        }
+    }
+
+    &__logo{
+
+    }
+    &__price-range{
+
+    }
+}

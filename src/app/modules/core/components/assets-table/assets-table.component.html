@@ -1,0 +1,31 @@
+<table mat-table [dataSource]="rates" class="mat-elevation-z8">
+    <!-- Icon Column -->
+    <ng-container matColumnDef="icon">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+            <!-- <app-coin-icon height="32px" width="32px"
+                [asset_id]="element.asset_id_quote"></app-coin-icon> -->
+            </td>
+    </ng-container>
+
+    <!-- Asset Column -->
+    <ng-container matColumnDef="asset">
+        <th mat-header-cell *matHeaderCellDef> Asset </th>
+        <td mat-cell *matCellDef="let element">{{element.asset_id_quote}}</td>
+    </ng-container>
+
+    <!-- Rate Column -->
+    <ng-container matColumnDef="rate">
+        <th mat-header-cell *matHeaderCellDef> Rate </th>
+        <td mat-cell *matCellDef="let element">${{element.rate | number}} </td>
+    </ng-container>
+
+    <!-- Rate Column -->
+    <ng-container matColumnDef="lastUpdate">
+        <th mat-header-cell *matHeaderCellDef> Last update </th>
+        <td mat-cell *matCellDef="let element">{{element.time | date:'short'}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
