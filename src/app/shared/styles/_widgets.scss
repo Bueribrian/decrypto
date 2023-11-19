@@ -1,0 +1,13 @@
+.error-snackbar{
+    .mdc-snackbar__surface{
+      background-color: $bg-dark !important;
+    }
+    .mdc-snackbar__label{
+      color: crimson !important;
+    }
+    .mat-mdc-snack-bar-actions{
+      button{
+        color: $primary !important;
+      }
+    }
+  }

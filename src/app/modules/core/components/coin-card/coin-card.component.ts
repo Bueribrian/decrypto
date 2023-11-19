@@ -11,5 +11,5 @@ export class CoinCardComponent {
   public coin!: CoinGeckoCoin; 
   
   @Input({ required: true, alias: 'currency' })
-  public currentCurrency!: string; 
+  public currency!: string; 
 }

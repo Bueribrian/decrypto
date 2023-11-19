@@ -1,7 +1,8 @@
 @import './_variables.scss';
+@import './_mixings.scss';
 @import './_global.scss';
 @import './fonts.scss';
 @import './_layout.scss';
-@import './_mixings.scss';
+@import './_widgets.scss';
 @import './theme/_index.scss';
-// @import './utils/_index.scss';
+@import './utils/_index.scss';

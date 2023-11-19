@@ -1,20 +1,34 @@
+// Breakpoints
+$sm: 60;
+$md: 96;
+$lg: 128;
+$xl: 192;
+
 // Media queries
-@mixin responsive($breakpoint){
-    @if $breakpoint == 'md' {
-        @media screen and (min-width: #{$md}rem) {
-            @content;
+@mixin responsive($device){
+    @if $device == phone { 
+        @media screen and (max-width:37.5em){
+            @content
         }
     }
-
-    @if $breakpoint == 'lg' {
-        @media screen and (min-width: #{$lg}rem) {
-            @content;
+    @if $device == tab-port { 
+        @media screen and (max-width:56.25em){
+            @content
         }
     }
-
-    @if $breakpoint == 'xl' {
-        @media screen and (min-width: #{$xl}rem) {
-            @content;
+    @if $device == tab-land { 
+        @media screen and (max-width:75em){
+            @content
+        }
+    }
+    @if $device == mid-desktop { 
+        @media screen and (max-width:93.75em){
+            @content
+        }
+    }
+    @if $device == big-desktop { 
+        @media screen and (min-width:112.5em){
+            @content
         }
     }
 }

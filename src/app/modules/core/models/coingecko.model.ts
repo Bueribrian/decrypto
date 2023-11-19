@@ -25,7 +25,7 @@ export interface CoinGeckoCoin {
     atl_date: string;
     roi: null;
     last_updated: string;
-    price_change_percentage_1h_in_currency: number;
+    price_change_percentage_1h_in_currency?: number;
 }
 
 export interface CoinMarketParams {

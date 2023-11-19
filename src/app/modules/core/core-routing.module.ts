@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ViewCoinComponent } from './components/view-coin/view-coin.component';
 
 const routes: Routes = [
   {
     component: HomeComponent,
-    path: ''
+    path: '',
   },
   {
-    component: PageNotFoundComponent,
+    component: ViewCoinComponent,
     path: ':coin'
   },
-  {
-    component: PageNotFoundComponent,
-    path: '**'
-  }
 ];
 
 @NgModule({

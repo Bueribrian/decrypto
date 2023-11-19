@@ -7,6 +7,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { CoinIconComponent } from './components/coin-icon/coin-icon.component';
 import { PricePercentageComponent } from './components/price-percentage/price-percentage.component'
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatCardModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   exports: [
     NavbarComponent,

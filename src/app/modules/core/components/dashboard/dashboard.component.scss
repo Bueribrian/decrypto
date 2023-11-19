@@ -4,6 +4,11 @@
     gap: 1rem 0rem;
     margin-top: 5rem;
 
+    &__title{
+        font-size: 2rem;
+        padding-bottom: 1rem;
+    }
+
     &__header {
         display: flex;
         align-items: flex-start;

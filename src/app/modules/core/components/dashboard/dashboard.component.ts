@@ -19,13 +19,12 @@ export class DashboardComponent {
   public loading: boolean = false;
   public error: { message: string } | null = null;
   public displayType: 'table' | 'cards' = 'cards';
-  public currencies: string[] = ['ARS', 'BTC', 'USD', 'USDT', 'DAI', 'ETH'];
+  public currencies: string[] = ['ARS', 'BTC', 'USD', 'ETH'];
   public selectedCurrency: string = 'USD';
   public $coins: BehaviorSubject<CoinGeckoCoin[]> = new BehaviorSubject<CoinGeckoCoin[]>([]);
 
   ngOnInit() {
     this.getTrendigCurrencies();
-    console.log('holaaa')
   }
 
   public getTrendigCurrencies() {

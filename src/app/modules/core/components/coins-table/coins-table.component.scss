@@ -1,0 +1,28 @@
+@import "_variables.scss";
+@import "_mixings.scss";
+
+table {
+    width: 100% !important;
+
+    .header{
+        background: $bg-dark;
+
+    }
+
+    tr {
+        cursor: pointer;
+
+        &:hover, &:focus{
+            background: $bg-dark;
+        }
+    }
+
+    @include responsive(phone){
+        display: block;
+        overflow-x: scroll;
+    }
+}
+
+.mat-column-icon{
+    width: 3.2rem;
+}

@@ -1,11 +1,11 @@
 export interface Rate {
-    asset_id_quote: string
+    asset_id_quote: string,
     rate: number,
-    time: Date
+    time: Date,
 }
 
 export interface ExchangeRatesResponse {
-    asset_id_base: string;
+    asset_id_base: string,
     rates: Rate[]
 }
 

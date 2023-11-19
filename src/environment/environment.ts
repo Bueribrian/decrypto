@@ -6,6 +6,9 @@ export const environment: Environment = {
         coinapi: {
             url: "https://rest.coinapi.io/v1/",
             token: "4C4FF1FD-457B-4D26-9417-06D8C0167BBC"
-        }
+        },
+        coingecko: {
+            url: "https://api.coingecko.com/api/v3/",
+        },
     }
 }
