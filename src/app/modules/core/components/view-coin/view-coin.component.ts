@@ -16,13 +16,13 @@ export class ViewCoinComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   public currencyService = inject(CurrencyService);
-  
+
   public loading: boolean = true;
   public coinId: string = "";
   public daysList: number[] = [1, 7, 14, 28];
   public selectedDays: number = 7;
   public $coinData: BehaviorSubject<Coin | null> = new BehaviorSubject<Coin | null>(null);
-  public $marketChartData: BehaviorSubject<MarketChartResponse|null> = new BehaviorSubject<MarketChartResponse|null>(null);
+  public $marketChartData: BehaviorSubject<MarketChartResponse | null> = new BehaviorSubject<MarketChartResponse | null>(null);
 
   ngOnInit() {
     this.route.params
@@ -38,9 +38,9 @@ export class ViewCoinComponent {
 
       })
   }
-  
+
   get coin(): Coin | null {
-    return this.$coinData.value ;
+    return this.$coinData.value;
   }
 
   public getCoin() {
