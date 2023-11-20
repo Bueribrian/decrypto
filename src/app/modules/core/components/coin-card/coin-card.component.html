@@ -1,15 +1,14 @@
 <mat-card class="card">
     <div class="card__header">
-        <app-coin-icon class="card__logo" height="6.4rem" width="6.4rem" [url]="getImage()"></app-coin-icon>
-        <app-price-percentage *ngIf="coin.price_change_percentage_1h_in_currency" class="card__price-range"
-            [price]="coin.price_change_percentage_1h_in_currency">
-        </app-price-percentage>
+        <app-coin-icon class="card__logo" height="6.4rem" width="6.4rem" [url]="coin.image"></app-coin-icon>
+        <span *ngIf="coin.price_change_percentage_1h_in_currency" class="card__price-range" matTooltipPosition="above" matTooltip="1 hour">
+            <app-price-percentage [price]="coin.price_change_percentage_1h_in_currency">
+            </app-price-percentage>
+        </span>
     </div>
     <div class="card__body">
         <mat-card-title class="card__body-symbol">{{ coin.symbol | uppercase}}</mat-card-title>
         <mat-card-subtitle class="card__body-id">{{ coin.id | titlecase }}</mat-card-subtitle>
         <mat-card-subtitle class="card__body-price">{{ coin.current_price | currency }}</mat-card-subtitle>
     </div>
-
-    <ng-content></ng-content>
 </mat-card>

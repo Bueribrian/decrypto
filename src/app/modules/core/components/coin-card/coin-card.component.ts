@@ -10,12 +10,4 @@ export class CoinCardComponent {
   @Input({ required: true, alias: 'coin' })
   public coin!: Currency; 
 
-  public getImage(): string{
-    if(typeof this.coin.image === 'string'){
-      return this.coin.image
-    }else{
-      return this.coin.image.large
-    }
-  }
-
 }

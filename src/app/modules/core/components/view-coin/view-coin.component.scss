@@ -1,0 +1,41 @@
+.view {
+    padding: 2rem;
+    gap: 1rem;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        & .details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-transform: uppercase;
+
+            &-symbol {
+                width: 100%;
+                font-size: 2.5rem;
+                font-weight: 600;
+                letter-spacing: 0.1rem;
+            }
+
+            &-id {
+                font-size: 1.2rem;
+                font-weight: 200;
+                letter-spacing: 1px;
+                color: rgba(#fff, 0.8);
+            }
+        }
+
+        & .controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+    }
+
+    &__content {
+        width: 100%;
+    }
+}

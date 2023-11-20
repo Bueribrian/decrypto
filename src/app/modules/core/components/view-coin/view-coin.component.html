@@ -1,12 +1,42 @@
 <!-- TODO: Mejorar la UI, selector de intervalos y vs_currency -->
-<div class="container">
-    <app-coin-card *ngIf="!loading; else loadingSpinner" [coin]="($coinData|async)">
-        <div>
-            <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [legend]="lineChartLegend">
-            </canvas>
-        </div>
-    </app-coin-card>
+<div *ngIf="!loading && coin; else loadingSpinner" class="container">
+    <mat-card class="view">
+        <div class="view__header">
+            
+            <div class="details">
+                <app-coin-icon class="card__logo" height="6.4rem" width="6.4rem"
+                    [url]="coin.image.large"></app-coin-icon>
+                <h1 class="view__header-symbol">{{coin.symbol}} ({{coin.id}})</h1>
+            </div>
 
+            <div class="controls">
+                <!-- Date range -->
+                <mat-form-field>
+                    <mat-label>Historial days</mat-label>
+                    <mat-select class="no-padding" (selectionChange)="historialDaysSelect()" [(value)]="selectedDays">
+                        <mat-option *ngFor="let days of daysList" [value]="days">
+                            {{days}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- vs_currency -->
+                <mat-form-field>
+                    <mat-label>Base coin</mat-label>
+                    <mat-select class="no-padding" (selectionChange)="vsCurrencySelect($event)"
+                        [(value)]=" this.currencyService.selectedCurrency">
+                        <mat-option *ngFor="let currency of this.currencyService.currencyList" [value]="currency">
+                            {{currency}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="view__content">
+            <app-historial-market-chart [data]="$marketChartData"></app-historial-market-chart>
+        </div>
+    </mat-card>
 </div>
 
 <ng-template #loadingSpinner>

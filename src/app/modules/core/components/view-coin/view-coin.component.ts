@@ -3,6 +3,8 @@ import { CurrencyService } from '../../services/currency.service';
 import { BehaviorSubject, ReplaySubject, combineLatest, finalize, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarketChartResponse } from '../../models/currency.model';
+import { MatSelectChange } from '@angular/material/select';
+import { Coin } from '../../models/coin.model';
 
 @Component({
   selector: 'app-view-coin',
@@ -11,61 +13,69 @@ import { MarketChartResponse } from '../../models/currency.model';
 })
 export class ViewCoinComponent {
   private $destroy = new ReplaySubject(0);
-  private currencyService = inject(CurrencyService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  public currencyService = inject(CurrencyService);
   
-  public loading: boolean = false;
-  public $coinData: BehaviorSubject<any> = new BehaviorSubject(null);
-  public lineChartData: { data: number[], label: string }[] = [];
-  public lineChartLabels: string[] = [];
-  public lineChartLegend = true;
-  public lineChartType = 'line';
+  public loading: boolean = true;
+  public coinId: string = "";
+  public daysList: number[] = [1, 7, 14, 28];
+  public selectedDays: number = 7;
+  public $coinData: BehaviorSubject<Coin | null> = new BehaviorSubject<Coin | null>(null);
+  public $marketChartData: BehaviorSubject<MarketChartResponse|null> = new BehaviorSubject<MarketChartResponse|null>(null);
 
   ngOnInit() {
     this.route.params
       .pipe(takeUntil(this.$destroy))
       .subscribe(params => {
-        const coinId = params['coin'];
+        this.coinId = params['coin'];
 
-        if (!coinId) this.router.navigate(['/coins']);
+        if (this.coinId) {
+          this.getCoin();
+        } else {
+          this.router.navigate(['/coins']);
+        }
 
-        this.getCoin(coinId)
       })
   }
+  
+  get coin(): Coin | null {
+    return this.$coinData.value ;
+  }
 
-  private getCoin(id: string) {
+  public getCoin() {
     this.loading = true;
-    
+
     combineLatest({
-      coin: this.currencyService.getCurrency(id),
-      market_chart: this.currencyService.getMarketChart({
-        id,
-        vs_currency: 'USD',
-        days: 14
+      coin: this.currencyService.getCurrency(this.coinId),
+      marketChartData: this.currencyService.getMarketChart({
+        id: this.coinId,
+        vs_currency: this.currencyService.selectedCurrency,
+        days: this.selectedDays
       })
     })
       .pipe(
         finalize(() => this.loading = false),
         takeUntil(this.$destroy))
       .subscribe({
-        next: ({coin, market_chart}) => {
+        next: ({ coin, marketChartData }) => {
           this.$coinData.next(coin);
-          this.generateChart(market_chart);
+          this.$marketChartData.next(marketChartData);
         },
-        error: (error) => {
+        error: () => {
           this.router.navigate(['/coins']);
         }
       })
   }
 
-  private generateChart(marketChartStats: MarketChartResponse): void{
-    const prices: any[] = marketChartStats.prices;
-    const formattedPrices: number[] = prices.map(priceData => priceData[1]);
-    const timestamps: number[] = prices.map(priceData => priceData[0]);
 
-    this.lineChartData = [{ data: formattedPrices, label: 'Price' }];
-    this.lineChartLabels = timestamps.map(timestamp => new Date(timestamp).toLocaleDateString());
+  public vsCurrencySelect(currency: MatSelectChange): void {
+    this.currencyService.selectedCurrency = currency.value;
+    this.getCoin();
+  }
+
+  public historialDaysSelect(): void {
+    this.getCoin();
   }
 
   ngOnDestroy() {

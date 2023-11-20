@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Currency, CurrencyMarketParams, MarketChartParams, MarketChartResponse } from '../models/currency.model';
 import { BehaviorSubject, Observable, catchError } from 'rxjs';
 import { environment } from 'src/environment/environment';
+import { Coin } from '../models/coin.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +44,10 @@ export class CurrencyService {
       .get<Currency[]>(this.trendingCurrenciesUrl, { params: queryParams })
   }
 
-  public getCurrency(currencyId: string) {
+  public getCurrency(currencyId: string): Observable<Coin> {
     const url = this.currencyByIdUrl.replace(':id', currencyId);
 
-    return this.http.get(url);
+    return this.http.get<Coin>(url);
   }
 
   public getMarketChart(params: MarketChartParams): Observable<MarketChartResponse> {

@@ -19,13 +19,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { HistorialMarketChartComponent } from './components/historial-market-chart/historial-market-chart.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     CoinCardComponent,
     CoinsTableComponent,
-    ViewCoinComponent
+    ViewCoinComponent,
+    HistorialMarketChartComponent
   ],
   imports: [
     CommonModule,
