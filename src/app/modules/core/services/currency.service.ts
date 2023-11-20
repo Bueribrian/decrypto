@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Currency, CurrencyMarketParams, MarketChartParams } from '../models/currency.model';
+import { Currency, CurrencyMarketParams, MarketChartParams, MarketChartResponse } from '../models/currency.model';
 import { BehaviorSubject, Observable, catchError } from 'rxjs';
 import { environment } from 'src/environment/environment';
 
@@ -49,10 +49,10 @@ export class CurrencyService {
     return this.http.get(url);
   }
 
-  public getMarketChart(params: MarketChartParams): Observable<{ market_caps: [string[]], prices: [string[]], total_volumes: [string[]] }> {
+  public getMarketChart(params: MarketChartParams): Observable<MarketChartResponse> {
     const url = this.marketChartUrl.replace(':id', params.id);
 
-    return this.http.get<{ market_caps: [string[]], prices: [string[]], total_volumes: [string[]] }>(url, { params: { ...params } })
+    return this.http.get<MarketChartResponse>(url, { params: { ...params } })
   }
 
 }

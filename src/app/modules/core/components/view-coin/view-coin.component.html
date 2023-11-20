@@ -1,10 +1,8 @@
+<!-- TODO: Mejorar la UI, selector de intervalos y vs_currency -->
 <div class="container">
     <app-coin-card *ngIf="!loading; else loadingSpinner" [coin]="($coinData|async)">
         <div>
-            <canvas baseChart 
-                [datasets]="lineChartData" 
-                [labels]="lineChartLabels" 
-                [legend]="lineChartLegend">
+            <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [legend]="lineChartLegend">
             </canvas>
         </div>
     </app-coin-card>

@@ -30,6 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   private handleHttpError(error: HttpErrorResponse): void {
     let errorMessage = `Código de error: ${error.status}, Mensaje: ${error.message}`
 
+    // TODO: MEJORAR EL MANEJO DE ERROR
     // Sobrescribo, error del lado del cliente
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error}`;

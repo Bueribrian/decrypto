@@ -2,8 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CurrencyService } from '../../services/currency.service';
 import { BehaviorSubject, ReplaySubject, combineLatest, finalize, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { error } from 'cypress/types/jquery';
-import { ChartData, ChartTypeRegistry } from 'chart.js';
 import { MarketChartResponse } from '../../models/currency.model';
 
 @Component({
