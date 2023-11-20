@@ -11,8 +11,8 @@
             <div class="controls">
                 <!-- Date range -->
                 <mat-form-field>
-                    <mat-label>Historial days</mat-label>
-                    <mat-select class="no-padding" (selectionChange)="historialDaysSelect()" [(value)]="selectedDays">
+                    <mat-label>Day range</mat-label>
+                    <mat-select class="no-padding" (selectionChange)="dayRangeSelect()" [(value)]="selectedDays">
                         <mat-option *ngFor="let days of daysList" [value]="days">
                             {{days}}
                         </mat-option>
@@ -33,6 +33,7 @@
         </div>
 
         <div class="view__content">
+            <h2>Historical price:</h2>
             <app-historial-market-chart [data]="$marketChartData"></app-historial-market-chart>
         </div>
     </mat-card>

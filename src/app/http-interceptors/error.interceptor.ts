@@ -20,25 +20,23 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-
         this.handleHttpError(error);
+ 
         return throwError(error);
       })
     );
   }
 
   private handleHttpError(error: HttpErrorResponse): void {
-    let errorMessage = `Código de error: ${error.status}, Mensaje: ${error.message}`
+    let errorMessage = `Code: ${error.status}, Message: ${error.error.error}`
 
-    // TODO: MEJORAR EL MANEJO DE ERROR
-    // Sobrescribo, error del lado del cliente
+    // Front error
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error}`;
     }
 
-    console.log(error)
     if(error.status === 0){
-      errorMessage = `Error: too many requeqst`;
+      errorMessage = `Code: 429, Message: Too many requests`
     }
 
     this.snackBar.open(errorMessage, 'Cerrar', {

@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CurrencyService } from '../../services/currency.service';
-import { BehaviorSubject, ReplaySubject, combineLatest, finalize, takeUntil } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, finalize, forkJoin, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MarketChartResponse } from '../../models/currency.model';
+import { MarketChartParams, MarketChartResponse } from '../../models/currency.model';
 import { MatSelectChange } from '@angular/material/select';
 import { Coin } from '../../models/coin.model';
 
@@ -35,7 +35,6 @@ export class ViewCoinComponent {
         } else {
           this.router.navigate(['/coins']);
         }
-
       })
   }
 
@@ -46,13 +45,15 @@ export class ViewCoinComponent {
   public getCoin() {
     this.loading = true;
 
-    combineLatest({
+    const marketChartParams: MarketChartParams = {
+      id: this.coinId,
+      vs_currency: this.currencyService.selectedCurrency,
+      days: this.selectedDays
+    }
+
+    forkJoin({
       coin: this.currencyService.getCurrency(this.coinId),
-      marketChartData: this.currencyService.getMarketChart({
-        id: this.coinId,
-        vs_currency: this.currencyService.selectedCurrency,
-        days: this.selectedDays
-      })
+      marketChartData: this.currencyService.getMarketChart(marketChartParams)
     })
       .pipe(
         finalize(() => this.loading = false),
@@ -74,7 +75,7 @@ export class ViewCoinComponent {
     this.getCoin();
   }
 
-  public historialDaysSelect(): void {
+  public dayRangeSelect(): void {
     this.getCoin();
   }
 
