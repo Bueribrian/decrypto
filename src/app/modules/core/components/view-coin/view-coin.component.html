@@ -1,4 +1,3 @@
-<!-- TODO: Mejorar la UI, selector de intervalos y vs_currency -->
 <div *ngIf="!loading && coin; else loadingSpinner" class="container">
     <mat-card class="view">
         <div class="view__header">
@@ -6,7 +5,7 @@
             <div class="details">
                 <app-coin-icon class="card__logo" height="6.4rem" width="6.4rem"
                     [url]="coin.image.large"></app-coin-icon>
-                <h1 class="view__header-symbol">{{coin.symbol}} ({{coin.id}})</h1>
+                <h1 class="view__header-symbol">{{coin.symbol}} <span class="text-muted">({{coin.id}})</span></h1>
             </div>
 
             <div class="controls">

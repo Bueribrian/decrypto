@@ -4,7 +4,6 @@ import { CurrencyService } from '../../services/currency.service';
 import { Currency } from '../../models/currency.model';
 import { MatSelectChange } from '@angular/material/select';
 
-// TODO: Make responsive
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

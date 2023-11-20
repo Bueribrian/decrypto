@@ -35,9 +35,13 @@ export class ErrorInterceptor implements HttpInterceptor {
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error}`;
     }
-    console.log(error.error);
 
-    this.snackBar.open(`Error: ${error.error.error}`, 'Cerrar', {
+    console.log(error)
+    if(error.status === 0){
+      errorMessage = `Error: too many requeqst`;
+    }
+
+    this.snackBar.open(errorMessage, 'Cerrar', {
       duration: 10000,
       horizontalPosition: 'left',
       verticalPosition: 'bottom',
