@@ -7,13 +7,13 @@
         </td>
     </ng-container>
 
-    <!-- Asset Column -->
+    <!-- Coin Column -->
     <ng-container matColumnDef="asset">
         <th class="text-bold" mat-header-cell *matHeaderCellDef>{{'Coin'|uppercase}}</th>
         <td mat-cell *matCellDef="let element"><h3>{{element.id | titlecase }}</h3> <span>{{element.symbol|uppercase}}</span></td>
     </ng-container>
 
-    <!-- Rate Column -->
+    <!-- Price Column -->
     <ng-container matColumnDef="rate">
         <th class="text-bold"  mat-header-cell *matHeaderCellDef>{{'Current price'|uppercase}}</th>
         <td mat-cell *matCellDef="let element">{{element.current_price | currency}} </td>

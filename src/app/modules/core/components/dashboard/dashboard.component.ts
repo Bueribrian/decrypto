@@ -1,9 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { ReplaySubject, BehaviorSubject, takeUntil } from 'rxjs';
-import { CoinapiService } from '../../services/coinapi.service';
-import { Rate } from '../../models/rate.model';
-import { CoingeckoService } from '../../services/coingecko.service';
-import { CoinGeckoCoin } from '../../models/coingecko.model';
+import { ReplaySubject, BehaviorSubject, finalize } from 'rxjs';
+import { CurrencyService } from '../../services/currency.service';
+import { Currency } from '../../models/currency.model';
+import { MatSelectChange } from '@angular/material/select';
 
 // TODO: Make responsive
 @Component({
@@ -12,16 +11,13 @@ import { CoinGeckoCoin } from '../../models/coingecko.model';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  private $destroy = new ReplaySubject();
-  private coinGeckoService = inject(CoingeckoService);
+  private $destroy = new ReplaySubject(0);
 
-  // TODO: Pasar algunas cosas al servicio
+  public currencyService = inject(CurrencyService);
   public loading: boolean = false;
   public error: { message: string } | null = null;
   public displayType: 'table' | 'cards' = 'cards';
-  public currencies: string[] = ['ARS', 'BTC', 'USD', 'ETH'];
-  public selectedCurrency: string = 'USD';
-  public $coins: BehaviorSubject<CoinGeckoCoin[]> = new BehaviorSubject<CoinGeckoCoin[]>([]);
+  public $coins: BehaviorSubject<Currency[]> = new BehaviorSubject<Currency[]>([]);
 
   ngOnInit() {
     this.getTrendigCurrencies();
@@ -29,22 +25,26 @@ export class DashboardComponent {
 
   public getTrendigCurrencies() {
     this.loading = true;
-    this.error = null; 
+    this.error = null;
 
-    this.coinGeckoService.getTrendingCurrencies({
-      fromCurrency: this.selectedCurrency,
-      price_change_percentage: '1h',
+    this.currencyService.getTrendingCurrencies({
+      fromCurrency: this.currencyService.selectedCurrency,
       per_page: 20
-    }).subscribe({
-      next: coins => {
-        this.$coins.next(coins);
-        this.loading = false;
-      },
-      error: (err) => {
-        this.loading = false;
-        this.error = { message: err }
-      }
     })
+      .pipe(finalize(() => this.loading = false))
+      .subscribe({
+        next: coins => {
+          this.$coins.next(coins);
+        },
+        error: (err) => {
+          this.error = { message: 'Hubo un error al cargar las monedas.' };
+        }
+      })
+  }
+
+  public handlerSelect(currency: MatSelectChange): void {
+    this.currencyService.selectedCurrency = currency.value;
+    this.getTrendigCurrencies();
   }
 
   ngOnDestroy() {

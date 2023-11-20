@@ -1,1 +1,11 @@
-<p>view-coin works!</p>
+<div class="container">
+    <app-coin-card
+    *ngIf="!loading; else loadingSpinner"
+    [coin]="($coinData|async)"></app-coin-card>
+</div>
+
+<ng-template #loadingSpinner>
+    <div class="flex-center-center p-8">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

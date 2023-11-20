@@ -2,9 +2,10 @@
     <div class="dashboard__header">
         <!-- Coin selector -->
         <mat-form-field>
-            <mat-label>Coin</mat-label>
-            <mat-select class="no-padding" (selectionChange)="getTrendigCurrencies()" [(value)]="selectedCurrency">
-                <mat-option *ngFor="let currency of currencies" [value]="currency">
+            <mat-label>Base coin</mat-label>
+            <mat-select class="no-padding" (selectionChange)="handlerSelect($event)"
+                [(value)]=" this.currencyService.selectedCurrency">
+                <mat-option *ngFor="let currency of this.currencyService.currencyList" [value]="currency">
                     {{currency}}
                 </mat-option>
             </mat-select>
@@ -30,8 +31,8 @@
             </ng-container>
             <ng-container *ngIf="displayType === 'cards'">
                 <div class="cards">
-                    <app-coin-card *ngFor="let coin of ($coins|async)" [coin]="coin"
-                        [currency]="selectedCurrency"></app-coin-card>
+                    <app-coin-card [routerLink]="['/coins',coin.id]" *ngFor="let coin of ($coins|async)" [coin]="coin">
+                    </app-coin-card>
                 </div>
             </ng-container>
         </ng-container>

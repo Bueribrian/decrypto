@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CoinGeckoCoin } from '../../models/coingecko.model';
+import { Currency } from '../../models/currency.model';
 
 @Component({
   selector: 'app-coin-card',
@@ -8,8 +8,14 @@ import { CoinGeckoCoin } from '../../models/coingecko.model';
 })
 export class CoinCardComponent {
   @Input({ required: true, alias: 'coin' })
-  public coin!: CoinGeckoCoin; 
-  
-  @Input({ required: true, alias: 'currency' })
-  public currency!: string; 
+  public coin!: Currency; 
+
+  public getImage(): string{
+    if(typeof this.coin.image === 'string'){
+      return this.coin.image
+    }else{
+      return this.coin.image.large
+    }
+  }
+
 }

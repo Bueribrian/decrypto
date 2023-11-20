@@ -1,8 +1,8 @@
-export interface CoinGeckoCoin {
+export interface Currency {
     id: string;
     symbol: string;
     name: string;
-    image: string;
+    image: string | { small: string, large: string, thumb: string };
     current_price: number;
     market_cap: number;
     market_cap_rank: number;
@@ -25,12 +25,20 @@ export interface CoinGeckoCoin {
     atl_date: string;
     roi: null;
     last_updated: string;
-    price_change_percentage_1h_in_currency?: number;
+    price_change_percentage_1h_in_currency: number;
 }
 
-export interface CoinMarketParams {
+export interface CurrencyMarketParams {
     fromCurrency: string,
     per_page?: number,
     page?: number,
     price_change_percentage?: '1h' | '24h' | '7d' | '14d' | '30d' | '200d' | '1y'
+}
+
+export interface MarketChartParams {
+    id: string,
+    vs_currency: string,
+    days: number,
+    interval?: 'daily',
+    precision?: number
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CoinGeckoCoin } from '../../models/coingecko.model';
+import { Currency } from '../../models/currency.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CoinsTableComponent {
   @Input({ required: true, alias: 'coins' })
-  public coins!: Observable<CoinGeckoCoin[]>; 
+  public coins!: Observable<Currency[]>; 
 
   public displayedColumns: string[] = ['icon', 'asset', 'rate', 'lastUpdate'];
 }
