@@ -49,11 +49,10 @@ export class CurrencyService {
     return this.http.get(url);
   }
 
-  public getMarketChart(params: MarketChartParams) {
+  public getMarketChart(params: MarketChartParams): Observable<{ market_caps: [string[]], prices: [string[]], total_volumes: [string[]] }> {
     const url = this.marketChartUrl.replace(':id', params.id);
 
-    return this.http.get(url, { params: { ...params } })
-
+    return this.http.get<{ market_caps: [string[]], prices: [string[]], total_volumes: [string[]] }>(url, { params: { ...params } })
   }
 
 }

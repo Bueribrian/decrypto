@@ -1,12 +1,8 @@
 import Environment from "./environment.model";
 
 export const environment: Environment = {
-    environment: 'dev',
+    environment: 'prod',
     services: {
-        coinapi: {
-            url: "https://rest.coinapi.io/v1/",
-            token: "4C4FF1FD-457B-4D26-9417-06D8C0167BBC"
-        },
         coingecko: {
             url: "https://api.coingecko.com/api/v3/",
         },

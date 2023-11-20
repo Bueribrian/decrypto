@@ -3,6 +3,8 @@ import { CurrencyService } from '../../services/currency.service';
 import { BehaviorSubject, ReplaySubject, combineLatest, finalize, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { error } from 'cypress/types/jquery';
+import { ChartData, ChartTypeRegistry } from 'chart.js';
+import { MarketChartResponse } from '../../models/currency.model';
 
 @Component({
   selector: 'app-view-coin',
@@ -16,7 +18,11 @@ export class ViewCoinComponent {
   private router = inject(Router);
   
   public loading: boolean = false;
-  public $coinData: BehaviorSubject<any> = new BehaviorSubject(null)
+  public $coinData: BehaviorSubject<any> = new BehaviorSubject(null);
+  public lineChartData: { data: number[], label: string }[] = [];
+  public lineChartLabels: string[] = [];
+  public lineChartLegend = true;
+  public lineChartType = 'line';
 
   ngOnInit() {
     this.route.params
@@ -45,13 +51,23 @@ export class ViewCoinComponent {
         finalize(() => this.loading = false),
         takeUntil(this.$destroy))
       .subscribe({
-        next: (data) => {
-          this.$coinData.next(data.coin);
+        next: ({coin, market_chart}) => {
+          this.$coinData.next(coin);
+          this.generateChart(market_chart);
         },
         error: (error) => {
           this.router.navigate(['/coins']);
         }
       })
+  }
+
+  private generateChart(marketChartStats: MarketChartResponse): void{
+    const prices: any[] = marketChartStats.prices;
+    const formattedPrices: number[] = prices.map(priceData => priceData[1]);
+    const timestamps: number[] = prices.map(priceData => priceData[0]);
+
+    this.lineChartData = [{ data: formattedPrices, label: 'Price' }];
+    this.lineChartLabels = timestamps.map(timestamp => new Date(timestamp).toLocaleDateString());
   }
 
   ngOnDestroy() {

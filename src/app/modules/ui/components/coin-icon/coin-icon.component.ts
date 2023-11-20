@@ -1,10 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { iconList } from './icon-list';
-
-interface Icon {
-  url: string,
-  asset_id: string
-}
 
 @Component({
   selector: 'app-coin-icon',
@@ -21,6 +15,4 @@ export class CoinIconComponent {
   @Input({ alias: 'height' })
   public height: string = 'auto';
 
-  ngOnInit(){
-  }
 }

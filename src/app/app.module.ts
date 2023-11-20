@@ -8,6 +8,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ErrorInterceptor } from './http-interceptors/error.interceptor';
 import { UiModule } from './modules/ui/ui.module';
 import { RouterModule } from '@angular/router';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     BrowserAnimationsModule,
     AppRoutingModule,
     UiModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgChartsModule
   ],
   providers: [
     {

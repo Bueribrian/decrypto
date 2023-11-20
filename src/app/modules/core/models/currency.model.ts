@@ -42,3 +42,9 @@ export interface MarketChartParams {
     interval?: 'daily',
     precision?: number
 }
+
+export interface MarketChartResponse {
+    market_caps: [string[]],
+    prices: [string[]],
+    total_volumes: [string[]]
+}
