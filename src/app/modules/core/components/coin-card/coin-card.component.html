@@ -7,8 +7,10 @@
         </span>
     </div>
     <div class="card__body">
-        <mat-card-title class="card__body-symbol">{{ coin.symbol | uppercase}}</mat-card-title>
-        <mat-card-subtitle class="card__body-id text-muted">{{ coin.id | titlecase }}</mat-card-subtitle>
+        <div class="card__body--names">
+            <mat-card-title class="card__body-symbol">{{ coin.symbol | uppercase}}</mat-card-title>
+            <mat-card-subtitle title="{{ coin.id | titlecase }}" class="card__body-id text-muted">{{ coin.id | titlecase }}</mat-card-subtitle>
+        </div>
         <mat-card-subtitle class="card__body-price">${{ coin.current_price | number:'1.2-4'  }}</mat-card-subtitle>
     </div>
 </mat-card>
