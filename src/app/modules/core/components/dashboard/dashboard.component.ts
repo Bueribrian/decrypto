@@ -33,10 +33,10 @@ export class DashboardComponent {
       .pipe(finalize(() => this.loading = false))
       .subscribe({
         next: coins => {
-          this.$coins.next(coins);
+          this.$coins.next(coins.filter(coin => coin.symbol.toUpperCase() !== this.currencyService.selectedCurrency));
         },
         error: (err) => {
-          this.error = { message: 'Hubo un error al cargar las monedas.' };
+          this.error = { message: 'There was an error loading the coins.' };
         }
       })
   }
